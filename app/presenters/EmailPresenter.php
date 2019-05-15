@@ -13,12 +13,12 @@ use Nette\Application\UI\Form;
 
 final class EmailPresenter extends Nette\Application\UI\Presenter
 {
-    public $mailer;
-
-    public function __construct(Nette\Mail\IMailer $mailer)
-    {
-        $this->mailer = $mailer;
-    }
+    // public $mailer;
+    //
+    // public function __construct(Nette\Mail\IMailer $mailer)
+    // {
+    //     $this->mailer = $mailer;
+    // }
 
     public function actionSendEmail()
     {

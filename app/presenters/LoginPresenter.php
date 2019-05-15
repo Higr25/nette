@@ -14,7 +14,6 @@ use Nette\Security\Identity;
 
 
 final class LoginPresenter extends Nette\Application\UI\Presenter
-
 {
 
       private $user;
