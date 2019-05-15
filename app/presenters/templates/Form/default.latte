@@ -1,0 +1,46 @@
+<link href="{$basePath}/css/form.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+
+<div class="bg"></div>
+
+<div class="form-container">
+
+{if $user->loggedIn}
+
+<div class="user-container">
+  <p>Uživatel: {$user->getIdentity()->first_name}
+               {$user->getIdentity()->last_name}
+  </p>
+</div>
+
+<p class="header">Pracovní výkaz</p>
+
+  {form employeeForm}
+
+    <table class="table2">
+      {foreach $form->controls as $name => $field}
+      <tr class="form">
+        <th>{label $name /}</th>
+        <td>{input $name}</td>
+        {/foreach}
+      </tr>
+    </table>
+
+    <div n:foreach="$flashes as $flash" n:class="$flash->type ? success">{$flash->message}</div>
+
+    <div class="button-container">
+      <a n:href="History:show" type="button" class="btn btn-primary">Historie</a>
+      <a n:href="Login:out" type="button" class="btn btn-primary">Odhlásit</a>
+    </div>
+
+    {/form}
+
+  {else}
+
+<p class="header">Musíte se Přihlásit</p>
+<a class="btn btn-primary" n:href="Login:login">Zpět</a>
+
+{/if}
+
+</div>

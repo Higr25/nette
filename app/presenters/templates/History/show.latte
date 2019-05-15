@@ -1,0 +1,32 @@
+{block content}
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link href="{$basePath}/css/form.css" rel="stylesheet" type="text/css" />
+    <p class="header" n:block="title">Výpis za poslední měsíc</p>
+
+  <div class="button-container">
+      <a class="btn btn-primary" n:href="Form:default">Zpět</a>
+  </div>
+
+
+  <table n:class="table, table-striped, table-hover">
+    <tr style="font-size: 20px; font-weight: bold; background-color: #cccccc;">
+      <td>ID</td>
+      <td>Jméno</td>
+      <td>Příjmení</td>
+      <td>Začátek Práce</td>
+      <td>Konec Práce</td>
+      <td>Náplň Práce</td>
+      <td>Úprava</td>
+    </tr>
+    <tr n:foreach="$employeeReports as $employeeReport">
+      <td>{$employeeReport->id}</td>
+      <td>{$employeeReport->first_name}</td>
+      <td>{$employeeReport->last_name}</td>
+      <td>{$employeeReport->work_start}</td>
+      <td>{$employeeReport->work_end}</td>
+      <td>{$employeeReport->comment}</td>
+      <td><a n:href="Form:edit $employeeReport->id">Upravit</a></td>
+    </tr>
+  </table>
+{/block}

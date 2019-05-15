@@ -1,0 +1,33 @@
+<link href="{$basePath}/css/form.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<div class="bg"></div>
+
+<div class="form-container">
+
+<p class="header">Upravit pracovní výkaz</p>
+
+  {form employeeForm}
+
+  <table class="table2">
+    {foreach $form->controls as $name => $field}
+    <tr class="form">
+      <th>{label $name /}</th>
+      <td>{input $name}</td>
+      {/foreach}
+    </tr>
+  </table>
+
+
+  <div class="button-container">
+    <a n:href="History:show" type="button" class="btn btn-primary">Historie</a>
+    <a n:href="Login:out" type="button" class="btn btn-primary">Odhlásit</a>
+  </div>
+
+
+    <div n:foreach="$flashes as $flash" n:class="$flash->type ? success">{$flash->message}</div>
+
+
+
+  {/form}
+</div>

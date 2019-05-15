@@ -1,0 +1,33 @@
+<link href="{$basePath}/css/form.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+
+<div class="bg"></div>
+
+<div class="form-container">
+
+{if $user->loggedIn}
+
+
+    <p class="user-container">Již jste přihlášen</p>
+    <a class="btn btn-primary back" n:href="Form:default">Pokračovat na formulář</a>
+
+
+
+{else}
+
+{form loginForm}
+  <table class="table2">
+    {foreach $form->controls as $name => $field}
+    <tr class="form">
+      <th>{label $name /}</th>
+      <td>{input $name}</td>
+      {/foreach}
+    </tr>
+  </table>
+{/form}
+
+<a n:href="Register:default" type="button" class="btn btn-primary">Register</a>
+
+</div>
+{/if}
