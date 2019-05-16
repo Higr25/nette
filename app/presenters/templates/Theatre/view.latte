@@ -1,0 +1,21 @@
+{block content}
+
+<link href="{$basePath}/css/theatre.css" rel="stylesheet" type="text/css" />
+
+{foreach $seats as $seat}
+
+    {first}<table>{/first}
+
+      {first 10}<tr>{/first}
+
+
+          <td n:class="$seat->free ? free, $seat->reserved ? reserved, $seat->sold ? sold">{$seat->seat_number}</td>
+
+
+
+      {last 10}</tr>{/last}
+
+    {last}</table>{/last}
+
+{/foreach}
+{/block}

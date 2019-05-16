@@ -1,0 +1,15 @@
+.seat{
+  border: 2px solid black;
+}
+
+.seat:hover{
+  background-color: grey;
+}
+
+.free{
+  background-color: green;
+}
+
+.reserved{
+  background-color: blue;
+}
