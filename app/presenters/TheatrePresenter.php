@@ -16,8 +16,15 @@ final class TheatrePresenter extends Nette\Application\UI\Presenter
         $this->database = $database;
     }
 
+
     public function renderView(): void
     {
-        $this->template->seats = $this->database->table('view');
+         $this->template->seats = $this->database->table('view');
     }
+
+    public function renderDialog()
+    {
+        
+    }
+
 }

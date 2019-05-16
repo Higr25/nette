@@ -1,6 +1,7 @@
 {block content}
 
 <link href="{$basePath}/css/theatre.css" rel="stylesheet" type="text/css" />
+<link href="{$basePath}/js/theatre.js" rel="javascript" type="text/css" />
 
 {foreach $seats as $seat}
 
@@ -8,10 +9,17 @@
 
       {first 10}<tr>{/first}
 
+        {if $seat->free}
+        <td class="seat free">{$seat->seat_number}</td>
+        {/if}
 
-          <td n:class="$seat->free ? free, $seat->reserved ? reserved, $seat->sold ? sold">{$seat->seat_number}</td>
+        {if $seat->reserved}
+        <td class="seat reserved">{$seat->seat_number}</td>
+        {/if}
 
-
+        {if $seat->sold}
+        <td class="seat sold">{$seat->seat_number}</td>
+        {/if}
 
       {last 10}</tr>{/last}
 
