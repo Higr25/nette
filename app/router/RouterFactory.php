@@ -24,6 +24,7 @@ final class RouterFactory
 		$router->addRoute('register', 'Register:default');
 		$router->addRoute('email', 'Email:default');
 		$router->addRoute('sendemail', 'Email:SendEmail');
+		$router->addRoute('view', 'View:default');
 		return $router;
 	}
 }
