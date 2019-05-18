@@ -13,35 +13,29 @@
       {first 10}<tr>{/first}
 
         {if $seat->free}
-              <td class="seat free">
+              <td class="seat">
                 <!-- <a n:href="Theatre:select $seat->seat_number" > -->
-                  <div class="cell" onclick="addNumber({$seat->seat_number})" >
+                  <div class="cell free" onclick="addNumber({$seat->seat_number})" >
                     <script type="text/javascript">
 
 
 
-                      function addNumber(number)
-                     {
-                       var cell = document.querySelectorAll(".cell");
-                       var input = document.getElementById("frm-reservationForm-seat_number");
-                       var old = input.value;
+                       function addNumber(number)
+                      {
+                        var cell = document.querySelectorAll(".cell");
+                        var input = document.getElementById("frm-reservationForm-seat_number");
+                        var old = input.value;
 
-                       for (var i = 0; i < cell.length; i++) {
-                         cell[i].addEventListener("click", function()
-                         {
-                           if (this.style.backgroundColor == "green") {
-                             this.style.backgroundColor = "orange";
-                           }
-                           else {
-                             this.style.backgroundColor = "green"
-                           }
-                         })
-                       }
-
-                       input.value = old + " " + number + ",";
-                       }
+                        for (var i = 0; i < cell.length; i++) {
+                          cell[i].addEventListener("click", function()
+                          {
+                            this.style.backgroundColor = "orange";
+                          })
+                        }
 
 
+                        input.value = old + " " + number + ",";
+                        }
 
 
 
@@ -78,13 +72,7 @@
 <div n:foreach="$flashes as $flash" n:class="flash, $flash->type">
   {$flash->message}
 </div>
-<button type="button" name="button" id="testbutton">test</button>
 
-
-
-<p id="output">test</p>
 {/block}
-
-
 
 </div>

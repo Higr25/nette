@@ -1,11 +1,13 @@
 window.addEventListener("load", function()
 {
-    var td = document.getElementsByClassName("free");
+  var cellNumber = " {$seat->seat_number}";
+  var cell = document.getElementsByClassName("cell");
+  var i;
+  for (var i = 0; i < cell.length; i++) {
+    cell[i].addEventListener("click", function()
+    {
+        document.getElementById("frm-reservationForm-seat_number").value = cellNumber;
+    })
+  }
 
-    for (var i = 0; i < td.length; i++) {
-      td[i].addEventListener("click", function()
-      {
-        
-      })
-    }
-})
+  })

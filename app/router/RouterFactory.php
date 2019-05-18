@@ -26,7 +26,8 @@ final class RouterFactory
 		$router->addRoute('sendemail', 'Email:SendEmail');
 		$router->addRoute('view', 'View:default');
 		$router->addRoute('theatre', 'Theatre:view');
-		
+		$router->addRoute('select', 'Theatre:select');
+
 		return $router;
 	}
 }
