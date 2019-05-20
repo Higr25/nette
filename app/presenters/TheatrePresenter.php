@@ -48,38 +48,54 @@ final class TheatrePresenter extends Nette\Application\UI\Presenter
 
     public function reserve(Form $form, $values)
     {
-      $seatNumber = $values['seat_number'];
-      $row = $this->database->table('view')
-            ->where('seat_number', $seatNumber)
-            ->fetch();
-      $isFree = $row['free'];
+      $seatNumberInput = $values['seat_number'];
 
-      $seatNumbers = explode(' ', $seatNumber);
+      $seatNumbers = explode(' ', $seatNumberInput);
 
-      var_dump($seatNumbers);
-      die();
+        foreach ($seatNumbers as $seatNumber) {
 
-      if ($isFree)
-       {
-         foreach ($seatNumbers as $seatNumber) {
+           $row = $this->database->table('view')
+                 ->where('seat_number', $seatNumber)
+                 ->fetch();
+           $isFree = $row['free'];
 
-           $seatNumber['person'] = $values['person'],
+        if ($isFree) {
+
+          $seatNumber = intval(preg_replace('/[^\d.]/', '', $seatNumber));
+
+           $seatNumberArray = [
+             'seat_number' => $seatNumber,
+             'person' => $values['person'],
+             'person_email' => $values['person_email'],
+             'person_phone' => $values['person_phone'],
+             'free' => 0,
+             'reserved' => 1];
+
+           $seat = $this->database->table('view')
+                 ->where('seat_number', $seatNumberArray['seat_number'])
+                 ->update([
+                     'person' => $seatNumberArray['person'],
+                     'person_email' => $seatNumberArray['person_email'],
+                     'person_phone' => $seatNumberArray['person_phone'],
+                     'free' => 0,
+                     'reserved' => 1,
+                         ]);
+            }
+            else
+            {
+                $this->flashMessage('Sedadlo není volné', 'error');
+            }
          }
-        $seat = $this->database->table('view')
-              ->where('seat_number', $values['seat_number'])
-              ->update([
-                  'person' => $values['person'],
-                  'person_email' => $values['person_email'],
-                  'person_phone' => $values['person_phone'],
-                  'free' => 0,
-                  'reserved' => 1,
-                      ]);
-      }
-      else
-      {
-          $this->flashMessage('Sedadlo není volné', 'error');
-      }
-    }
+
+         $this->redirect('this');
+       }
+
+         // echo '<pre>' , var_dump($seatNumberArray) , '</pre>';
+         // die();
+
+
+
+
 
     public function renderSelect(int $seatNumber)
     {

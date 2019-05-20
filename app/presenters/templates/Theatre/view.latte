@@ -14,41 +14,40 @@
 
         {if $seat->free}
               <td class="seat free">
-                <!-- <a n:href="Theatre:select $seat->seat_number" > -->
-                  <div class="cell" onclick="addNumber({$seat->seat_number})" >
+                  <div class="cell" onclick="addNumber({$seat->seat_number}); changeColor(this)" >
                     <script type="text/javascript">
 
+                    function addNumber(number)
+                      {
+                         var output = document.getElementById('output');
 
+                         var input = document.getElementById('frm-reservationForm-seat_number');
+                         var old = input.value;
 
-                      function addNumber(number)
-                     {
-                       var cell = document.querySelectorAll(".cell");
-                       var input = document.getElementById("frm-reservationForm-seat_number");
-                       var old = input.value;
-
-                       for (var i = 0; i < cell.length; i++) {
-                         cell[i].addEventListener("click", function()
+                         if (input.value.includes(number))
                          {
-                           if (this.style.backgroundColor == "green") {
-                             this.style.backgroundColor = "orange";
-                           }
-                           else {
-                             this.style.backgroundColor = "green"
-                           }
-                         })
-                       }
+                             old.replace(number, 'test');
+                         }
+                         else
+                         {
+                             input.value = old + ' ' + number + ',';
+                         }
+                      }
 
-                       input.value = old + " " + number + ",";
-                       }
-
-
-
+                    function changeColor(cell)
+                    {
+                      if (cell.style.backgroundColor = 'green') {
+                        cell.style.backgroundColor = 'orange';
+                      }
+                      else {
+                        cell.style.backgroundColor = 'green';
+                      }
+                    }
 
 
                     </script>
                      {$seat->seat_number}
                   </div>
-                <!-- </a> -->
              </td>
         {/if}
 

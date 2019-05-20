@@ -20,22 +20,25 @@
 
 
 
-                       function addNumber(number)
+                      function addNumber(number)
                       {
-                        var cell = document.querySelectorAll(".cell");
-                        var input = document.getElementById("frm-reservationForm-seat_number");
-                        var old = input.value;
+                         var output = document.getElementById('output');
 
-                        for (var i = 0; i < cell.length; i++) {
-                          cell[i].addEventListener("click", function()
-                          {
-                            this.style.backgroundColor = "orange";
-                          })
-                        }
+                         var cell = document.querySelectorAll('.cell');
+                         var input = document.getElementById('frm-reservationForm-seat_number');
+                         var old = input.value;
 
+                         if (input.value.includes(number))
+                         {
+                             input.value.replace(number, 'test');
+                         }
+                         else
+                         {
+                             input.value = old + ' ' + number + ',';
+                             this.style.backgroundColor = "orange";
+                         }
+                      }
 
-                        input.value = old + " " + number + ",";
-                        }
 
 
 
