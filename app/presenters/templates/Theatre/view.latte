@@ -13,37 +13,35 @@
       {first 10}<tr>{/first}
 
         {if $seat->free}
-              <td class="seat free">
-                  <div class="cell" onclick="addNumber({$seat->seat_number}); changeColor(this)" >
-                    <script type="text/javascript">
-
-                    function addNumber(number)
+              <td class="seat">
+                  <div class="cell free" onclick="addNumber({$seat->seat_number}, this)">
+                    <script>
+                    function addNumber(number, cell)
                       {
-                         var output = document.getElementById('output');
-
                          var input = document.getElementById('frm-reservationForm-seat_number');
                          var old = input.value;
+                         var includer = old.includes(number);
+                         var replacer = old.replace(number, '');
+                         var replacer2 = old.replace(',', '');
 
-                         if (input.value.includes(number))
+                         if (includer == true)
                          {
-                             old.replace(number, 'test');
+                           document.getElementById('frm-reservationForm-seat_number').value = replacer;
                          }
                          else
                          {
-                             input.value = old + ' ' + number + ',';
+                            input.value = old + ' ' + number + ','
+                          }
+
+                         if (cell.className == 'cell free')
+                         {
+                           cell.className = 'cell selected'
+                         }
+                         else
+                         {
+                           cell.className = 'cell free'
                          }
                       }
-
-                    function changeColor(cell)
-                    {
-                      if (cell.style.backgroundColor = 'green') {
-                        cell.style.backgroundColor = 'orange';
-                      }
-                      else {
-                        cell.style.backgroundColor = 'green';
-                      }
-                    }
-
 
                     </script>
                      {$seat->seat_number}
@@ -77,11 +75,11 @@
 <div n:foreach="$flashes as $flash" n:class="flash, $flash->type">
   {$flash->message}
 </div>
+
 <button type="button" name="button" id="testbutton">test</button>
 
 
-
-<p id="output">test</p>
+<p id="output">12, 13, 14</p>
 {/block}
 
 

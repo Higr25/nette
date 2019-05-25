@@ -26,17 +26,19 @@ final class TheatrePresenter extends Nette\Application\UI\Presenter
     {
         $form = new Form;
 
-        $form->addText('seat_number', 'Číslo sedadla:')
+        $form->addText('seat_number')
+             ->getControlPrototype()
+             ->addClass('hidden')
              ->setRequired();
 
         $form->addText('person', 'Jméno a příjmení:');
-             // ->setRequired();
+             ->setRequired();
 
         $form->addText('person_email', 'E-mail:');
-             // ->setRequired();
+             ->setRequired();
 
         $form->addText('person_phone', 'Telefon:');
-             // ->setRequired();
+             ->setRequired();
 
         $form->addSubmit('submit', 'Rezervovat');
 
@@ -49,19 +51,20 @@ final class TheatrePresenter extends Nette\Application\UI\Presenter
     public function reserve(Form $form, $values)
     {
       $seatNumberInput = $values['seat_number'];
-
       $seatNumbers = explode(' ', $seatNumberInput);
 
         foreach ($seatNumbers as $seatNumber) {
 
-           $row = $this->database->table('view')
+          $seatNumbers = str_replace(',', '', $seatNumbers);
+          $row = $this->database->table('view')
                  ->where('seat_number', $seatNumber)
                  ->fetch();
-           $isFree = $row['free'];
+          $isFree = $row['free'];
+
+          // echo '<pre>' , var_dump($seatNumbers) , '</pre>';
+          // die();
 
         if ($isFree) {
-
-          $seatNumber = intval(preg_replace('/[^\d.]/', '', $seatNumber));
 
            $seatNumberArray = [
              'seat_number' => $seatNumber,
@@ -86,12 +89,10 @@ final class TheatrePresenter extends Nette\Application\UI\Presenter
                 $this->flashMessage('Sedadlo není volné', 'error');
             }
          }
-
          $this->redirect('this');
        }
 
-         // echo '<pre>' , var_dump($seatNumberArray) , '</pre>';
-         // die();
+
 
 
 
