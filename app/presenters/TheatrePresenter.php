@@ -26,18 +26,18 @@ final class TheatrePresenter extends Nette\Application\UI\Presenter
     {
         $form = new Form;
 
-        $form->addText('seat_number')
+        $form->addTextArea('seat_number')
              ->getControlPrototype()
              ->addClass('hidden')
              ->setRequired();
 
-        $form->addText('person', 'Jméno a příjmení:');
+        $form->addText('person', 'Jméno a příjmení:')
              ->setRequired();
 
-        $form->addText('person_email', 'E-mail:');
+        $form->addText('person_email', 'E-mail:')
              ->setRequired();
 
-        $form->addText('person_phone', 'Telefon:');
+        $form->addText('person_phone', 'Telefon:')
              ->setRequired();
 
         $form->addSubmit('submit', 'Rezervovat');
@@ -54,8 +54,6 @@ final class TheatrePresenter extends Nette\Application\UI\Presenter
       $seatNumbers = explode(' ', $seatNumberInput);
 
         foreach ($seatNumbers as $seatNumber) {
-
-          $seatNumbers = str_replace(',', '', $seatNumbers);
           $row = $this->database->table('view')
                  ->where('seat_number', $seatNumber)
                  ->fetch();
@@ -84,11 +82,7 @@ final class TheatrePresenter extends Nette\Application\UI\Presenter
                      'reserved' => 1,
                          ]);
             }
-            else
-            {
-                $this->flashMessage('Sedadlo není volné', 'error');
-            }
-         }
+          }
          $this->redirect('this');
        }
 

@@ -22,7 +22,6 @@
                          var old = input.value;
                          var includer = old.includes(number);
                          var replacer = old.replace(number, '');
-                         var replacer2 = old.replace(',', '');
 
                          if (includer == true)
                          {
@@ -30,7 +29,7 @@
                          }
                          else
                          {
-                            input.value = old + ' ' + number + ','
+                            input.value = old + ' ' + number
                           }
 
                          if (cell.className == 'cell free')
