@@ -1,86 +1,185 @@
-{block content}
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link href="{$basePath}/css/theatre.css" rel="stylesheet" type="text/css" />
 <link href="{$basePath}/js/theatre.js" rel="javascript" type="text/css" />
 
-<div class="ViewContainer">
+<div class="bg"></div>
 
+<div class="ViewContainer1">
+  {foreach $seatsFloor as $seat}
+      {first}<table>{/first}
+        {first 10}<tr>{/first}
 
-{foreach $seats as $seat}
+          {if $seat->free}
+                <td class="">
+                    <div class="cell free" onclick="addNumber({$seat->seat_number}, this)">
+                          <script>
+                          function addNumber(number, cell)
+                            {
+                               var input = document.getElementById('frm-reservationForm-seat_number');
+                               var old = input.value;
+                               var includer = old.includes(number);
+                               var replacer = old.replace(number, '');
 
-    {first}<table>{/first}
+                               if (includer == true)
+                               {
+                                 document.getElementById('frm-reservationForm-seat_number').value = replacer;
+                               }
+                               else
+                               {
+                                  input.value = old + ' ' + number
+                                }
 
-      {first 10}<tr>{/first}
+                               if (cell.className == 'cell free')
+                               {
+                                 cell.className = 'cell selected'
+                               }
+                               else
+                               {
+                                 cell.className = 'cell free'
+                               }
+                            }
+                          </script>
+                       {$seat->seat_number}
+                    </div>
+               </td>
+          {/if}
 
-        {if $seat->free}
-              <td class="seat">
-                  <div class="cell free" onclick="addNumber({$seat->seat_number}, this)">
-                    <script>
-                    function addNumber(number, cell)
-                      {
-                         var input = document.getElementById('frm-reservationForm-seat_number');
-                         var old = input.value;
-                         var includer = old.includes(number);
-                         var replacer = old.replace(number, '');
+          {if $seat->reserved}
+          <td class="seat reserved">{$seat->seat_number}</td>
+          {/if}
 
-                         if (includer == true)
-                         {
-                           document.getElementById('frm-reservationForm-seat_number').value = replacer;
-                         }
-                         else
-                         {
-                            input.value = old + ' ' + number
-                          }
+          {if $seat->sold}
+          <td class="seat sold">{$seat->seat_number}</td>
+          {/if}
 
-                         if (cell.className == 'cell free')
-                         {
-                           cell.className = 'cell selected'
-                         }
-                         else
-                         {
-                           cell.className = 'cell free'
-                         }
-                      }
+        {last 10}</tr>{/last}
+      {last}</table>{/last}
+  {/foreach}
+</div>
 
-                    </script>
-                     {$seat->seat_number}
-                  </div>
-             </td>
-        {/if}
+<div class="ViewContainer2">
+  {foreach $seatsBalconyLeft as $seat}
+      {first}<table>{/first}
+        {first 2}<tr>{/first}
 
-        {if $seat->reserved}
-        <td class="seat reserved">{$seat->seat_number}</td>
-        {/if}
+          {if $seat->free}
+                <td class="">
+                    <div class="cell free" onclick="addNumber({$seat->seat_number}, this)">
+                          <script>
+                          function addNumber(number, cell)
+                            {
+                               var input = document.getElementById('frm-reservationForm-seat_number');
+                               var old = input.value;
+                               var includer = old.includes(number);
+                               var replacer = old.replace(number, '');
 
-        {if $seat->sold}
-        <td class="seat sold">{$seat->seat_number}</td>
-        {/if}
+                               if (includer == true)
+                               {
+                                 document.getElementById('frm-reservationForm-seat_number').value = replacer;
+                               }
+                               else
+                               {
+                                  input.value = old + ' ' + number
+                                }
 
-      {last 10}</tr>{/last}
+                               if (cell.className == 'cell free')
+                               {
+                                 cell.className = 'cell selected'
+                               }
+                               else
+                               {
+                                 cell.className = 'cell free'
+                               }
+                            }
+                          </script>
+                       {$seat->seat_number}
+                    </div>
+               </td>
+          {/if}
 
-    {last}</table>{/last}
+          {if $seat->reserved}
+          <td class="seat reserved">{$seat->seat_number}</td>
+          {/if}
 
-{/foreach}
+          {if $seat->sold}
+          <td class="seat sold">{$seat->seat_number}</td>
+          {/if}
 
-{form reservationForm}
-<table>
-  <tr n:foreach="$form->controls as $name => $field">
-    <td>{label $name}</td>
-    <td>{input $name}</td>
-  </tr>
-</table>
-{/form}
+        {last 2}</tr>{/last}
+      {last}</table>{/last}
+  {/foreach}
+</div>
 
-<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">
-  {$flash->message}
+<div class="ViewContainer3">
+  {foreach $seatsBalconyRight as $seat}
+      {first}<table>{/first}
+        {first 2}<tr>{/first}
+
+          {if $seat->free}
+                <td class="">
+                    <div class="cell free" onclick="addNumber({$seat->seat_number}, this)">
+                          <script>
+                          function addNumber(number, cell)
+                            {
+                               var input = document.getElementById('frm-reservationForm-seat_number');
+                               var old = input.value;
+                               var includer = old.includes(number);
+                               var replacer = old.replace(number, '');
+
+                               if (includer == true)
+                               {
+                                 document.getElementById('frm-reservationForm-seat_number').value = replacer;
+                               }
+                               else
+                               {
+                                  input.value = old + ' ' + number
+                                }
+
+                               if (cell.className == 'cell free')
+                               {
+                                 cell.className = 'cell selected'
+                               }
+                               else
+                               {
+                                 cell.className = 'cell free'
+                               }
+                            }
+                          </script>
+                       {$seat->seat_number}
+                    </div>
+               </td>
+          {/if}
+
+          {if $seat->reserved}
+          <td class="seat reserved">{$seat->seat_number}</td>
+          {/if}
+
+          {if $seat->sold}
+          <td class="seat sold">{$seat->seat_number}</td>
+          {/if}
+
+        {last 2}</tr>{/last}
+      {last}</table>{/last}
+  {/foreach}
+</div>
+
+<div class="FormContainer">
+
+  {form reservationForm}
+    <table class="form">
+      <tr n:foreach="$form->controls as $name => $field">
+        <td>{label $name}</td>
+        <td>{input $name}</td>
+      </tr>
+    </table>
+  {/form}
+
+    <div n:foreach="$flashes as $flash" n:class="flash, $flash->type">
+      {$flash->message}
+    </div>
+
 </div>
 
 <button type="button" name="button" id="testbutton">test</button>
-
-
 <p id="output">12, 13, 14</p>
-{/block}
-
-
-
-</div>

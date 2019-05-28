@@ -19,7 +19,12 @@ final class TheatrePresenter extends Nette\Application\UI\Presenter
 
     public function renderView(): void
     {
-         $this->template->seats = $this->database->table('view');
+         $this->template->seatsFloor = $this->database->table('view')
+                                      ->where('seat_number <= ?', 120);
+         $this->template->seatsBalconyLeft = $this->database->table('view')
+                                            ->where('seat_number >= ? AND seat_number <= ?', 121, 146);
+         $this->template->seatsBalconyRight = $this->database->table('view')
+                                              ->where('seat_number >= ? AND seat_number <= ?', 147, 172);
     }
 
     public function createComponentReservationForm()
@@ -86,20 +91,4 @@ final class TheatrePresenter extends Nette\Application\UI\Presenter
          $this->redirect('this');
        }
 
-
-
-
-
-
-
-    public function renderSelect(int $seatNumber)
-    {
-
-        $seat = $this->database->table('view')->get($seatNumber);
-        $this->template->seats = $this->database->table('view');
-
-        $seats[] = $seatNumber;
-
-        $this['reservationForm']->setDefaults($seats);
-    }
 }
