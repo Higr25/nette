@@ -27,7 +27,10 @@ final class RouterFactory
 		$router->addRoute('view', 'View:default');
 		$router->addRoute('theatre', 'Theatre:view');
 		$router->addRoute('select', 'Theatre:select');
+		$router->addRoute('theatre/out', 'Theatre:out');
 
 		return $router;
 	}
+
+
 }

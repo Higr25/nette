@@ -11,7 +11,7 @@
         {first 10}<tr>{/first}
 
           {if $seat->free}
-                <td class="">
+                <td>
                     <div class="cell free" onclick="addNumber({$seat->seat_number}, this)">
                           <script>
                           function addNumber(number, cell)
@@ -46,7 +46,32 @@
           {/if}
 
           {if $seat->reserved}
-          <td class="seat reserved">{$seat->seat_number}</td>
+            <td>
+              {if $user->isInRole(admin)}
+                <div class="cell reserved" onclick="showPerson({$seat->seat_number}, {$seat->person}, {$seat->person_email}, {$seat->person_phone}, this)">
+              {else}
+                <div class="cell reserved">
+              {/if}
+                    <script>
+                    function showPerson(number, person, email, phone, cell)
+                      {
+                        var debug = document.getElementById('output');
+                        var seatNumber = document.getElementById('seat_number');
+                        var seatPerson = document.getElementById('person');
+                        var personEmail = document.getElementById('person_email');
+                        var personPhone = document.getElementById('person_phone');
+
+                        document.getElementById('output').innerHTML = 'this works';
+
+                        seatNumber.innerHTML = number;
+                        seatPerson.innerHTML = person;
+                        personEmail.innerHTML = email;
+                        personPhone.innerHTML = phone;
+                      }
+                    </script>
+                    {$seat->seat_number}
+              </div>
+            </td>
           {/if}
 
           {if $seat->sold}
@@ -99,7 +124,32 @@
           {/if}
 
           {if $seat->reserved}
-          <td class="seat reserved">{$seat->seat_number}</td>
+            <td>
+              {if $user->isInRole(admin)}
+                <div class="cell reserved" onclick="showPerson({$seat->seat_number}, {$seat->person}, {$seat->person_email}, {$seat->person_phone}, this)">
+              {else}
+                <div class="cell reserved">
+              {/if}
+                    <script>
+                    function showPerson(number, person, email, phone, cell)
+                      {
+                        var debug = document.getElementById('output');
+                        var seatNumber = document.getElementById('seat_number');
+                        var seatPerson = document.getElementById('person');
+                        var personEmail = document.getElementById('person_email');
+                        var personPhone = document.getElementById('person_phone');
+
+                        document.getElementById('output').innerHTML = 'this works';
+
+                        seatNumber.innerHTML = number;
+                        seatPerson.innerHTML = person;
+                        personEmail.innerHTML = email;
+                        personPhone.innerHTML = phone;
+                      }
+                    </script>
+                    {$seat->seat_number}
+              </div>
+            </td>
           {/if}
 
           {if $seat->sold}
@@ -152,7 +202,32 @@
           {/if}
 
           {if $seat->reserved}
-          <td class="seat reserved">{$seat->seat_number}</td>
+            <td>
+              {if $user->isInRole(admin)}
+                <div class="cell reserved" onclick="showPerson({$seat->seat_number}, {$seat->person}, {$seat->person_email}, {$seat->person_phone}, this)">
+              {else}
+                <div class="cell reserved">
+              {/if}
+                    <script>
+                    function showPerson(number, person, email, phone, cell)
+                      {
+                        var debug = document.getElementById('output');
+                        var seatNumber = document.getElementById('seat_number');
+                        var seatPerson = document.getElementById('person');
+                        var personEmail = document.getElementById('person_email');
+                        var personPhone = document.getElementById('person_phone');
+
+                        document.getElementById('output').innerHTML = 'this works';
+
+                        seatNumber.innerHTML = number;
+                        seatPerson.innerHTML = person;
+                        personEmail.innerHTML = email;
+                        personPhone.innerHTML = phone;
+                      }
+                    </script>
+                    {$seat->seat_number}
+              </div>
+            </td>
           {/if}
 
           {if $seat->sold}
@@ -164,8 +239,35 @@
   {/foreach}
 </div>
 
-<div class="FormContainer">
 
+<div class="LoginContainer">
+
+  {if ! $user->IsLoggedIn()}
+
+    {form loginForm}
+      <table>
+        <tr>
+          {foreach $form->controls as $name => $field}
+            <td>{label $name}</td>
+            <td>{input $name}</td>
+          {/foreach}
+        </tr>
+      </table>
+    {/form}
+
+    {else}
+    <p>Uživatel: {$user->getIdentity()->first_name}
+                 {$user->getIdentity()->last_name}
+    </p>
+
+    <a n:href="Theatre:out">Odhlásit</a>
+
+  {/if}
+</div>
+
+
+
+<div class="FormContainer">
   {form reservationForm}
     <table class="form">
       <tr n:foreach="$form->controls as $name => $field">
@@ -181,5 +283,27 @@
 
 </div>
 
-<button type="button" name="button" id="testbutton">test</button>
-<p id="output">12, 13, 14</p>
+{if $user->isInRole(admin)}
+  <div class="SeatInfoContainer">
+    <table class="SeatInfo">
+      <tr>
+        <td>Číslo Sedadla</td>
+        <td id='seat_number'></td>
+      </tr>
+      <tr>
+        <td>Jméno a příjmení</td>
+        <td id='person'></td>
+      </tr>
+      <tr>
+        <td>E-mail</td>
+        <td id='person_email'></td>
+      </tr>
+      <tr>
+        <td>Telefon</td>
+        <td id='person_phone'></td>
+      </tr>
+    </table>
+  </div>
+{/if}
+<!-- <button type="button" name="button" id="testbutton">test</button> -->
+<p id="output">Debugger</p>

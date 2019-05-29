@@ -43,14 +43,20 @@ div.error {
 
 .ViewContainer3{
   position: absolute;
-  left: 51.6%;
+  left: 51.2%;
   top: 24.3%;
 }
 
 .FormContainer{
   position: absolute;
-  left: 22%;
-  top: 80%;
+  left: 70%;
+  top: 50%;
+}
+
+.LoginContainer{
+  position: absolute;
+  left: 70%;
+  top: 0%;
 }
 
 td{
@@ -83,6 +89,10 @@ table{
   background-color: grey;
 }
 
+.cell.reserved:hover{
+  background-color: grey;
+}
+
 .hidden{
   display: none;
 }
@@ -97,19 +107,31 @@ table{
 
 .form{
   position: relative;
-  font-size: 30px;
+  font-size: 20px;
   text-align: left;
   padding: 20px;
   color: #e0dfdc;
-  letter-spacing: .1em;
-  text-shadow:
-  0 -1px 0 #fff,
-  0 1px 0 #2e2e2e,
-  0 2px 0 #2c2c2c,
-  0 3px 0 #2a2a2a,
-  0 4px 0 #282828,
-  0 5px 0 #262626,
-  0 6px 0 #242424,
-  0 7px 0 #222,
   0 22px 30px rgba(0, 0, 0, 0.9);
+}
+
+#output{
+  position: absolute;
+  top: 80%;
+}
+
+.SeatInfoContainer{
+  position: absolute;
+  top: 30%;
+  left: 70%;
+}
+
+.SeatInfo{
+  border-collapse: collapse;
+  border: 2px solid black;
+  width: 500px;
+  height: 200px;
+}
+
+.SeatInfo td{
+  border: 1px solid black;
 }
