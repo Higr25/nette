@@ -25,6 +25,9 @@ Database connection in local.neon file:
 	
   --------------------
   
+  Employee report project:
+  -
+  
   Use employee_report.sql to create essential table and users.sql to create login database.
   
   --------------------
