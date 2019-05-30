@@ -24,9 +24,9 @@ final class RouterFactory
 		$router->addRoute('register', 'Register:default');
 		$router->addRoute('email', 'Email:default');
 		$router->addRoute('sendemail', 'Email:SendEmail');
-		$router->addRoute('view', 'View:default');
-		$router->addRoute('theatre', 'Theatre:view');
-		$router->addRoute('select', 'Theatre:select');
+		$router->addRoute('theatre/homepage', 'Theatre:homepage');
+		$router->addRoute('theatre/schedule', 'Schedule:schedule');
+		$router->addRoute('theatre/reserve', 'Theatre:reserve');
 		$router->addRoute('theatre/out', 'Theatre:out');
 
 		return $router;

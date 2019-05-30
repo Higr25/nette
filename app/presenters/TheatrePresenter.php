@@ -12,6 +12,8 @@ use Nette\Security\Identity;
 
 final class TheatrePresenter extends Nette\Application\UI\Presenter
 {
+
+
     private $database;
     private $user;
     private $userManager;
@@ -24,15 +26,24 @@ final class TheatrePresenter extends Nette\Application\UI\Presenter
     }
 
 
-    public function renderView(): void
+
+
+
+    public function renderReserve($table_name): void
     {
-         $this->template->seatsFloor = $this->database->table('view')
+         $tableName = $table_name;
+
+         // echo '<pre>' , var_dump($tableName) , '</pre>';
+         // die();
+
+         $this->template->seatsFloor = $this->database->table($tableName)
                                       ->where('seat_number <= ?', 120);
-         $this->template->seatsBalconyLeft = $this->database->table('view')
+         $this->template->seatsBalconyLeft = $this->database->table($tableName)
                                             ->where('seat_number >= ? AND seat_number <= ?', 121, 146);
-         $this->template->seatsBalconyRight = $this->database->table('view')
+         $this->template->seatsBalconyRight = $this->database->table($tableName)
                                               ->where('seat_number >= ? AND seat_number <= ?', 147, 172);
     }
+
 
     public function createComponentReservationForm()
     {
@@ -62,17 +73,19 @@ final class TheatrePresenter extends Nette\Application\UI\Presenter
 
     public function reserve(Form $form, $values)
     {
+
+      $tableName = $this->getParameter('table_name');
+
       $seatNumberInput = $values['seat_number'];
       $seatNumbers = explode(' ', $seatNumberInput);
 
         foreach ($seatNumbers as $seatNumber) {
-          $row = $this->database->table('view')
+          $row = $this->database->table($tableName)
                  ->where('seat_number', $seatNumber)
                  ->fetch();
           $isFree = $row['free'];
 
-          // echo '<pre>' , var_dump($seatNumbers) , '</pre>';
-          // die();
+
 
         if ($isFree) {
 
@@ -84,7 +97,7 @@ final class TheatrePresenter extends Nette\Application\UI\Presenter
              'free' => 0,
              'reserved' => 1];
 
-           $seat = $this->database->table('view')
+           $seat = $this->database->table($tableName)
                  ->where('seat_number', $seatNumberArray['seat_number'])
                  ->update([
                      'person' => $seatNumberArray['person'],
