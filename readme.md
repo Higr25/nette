@@ -1,7 +1,7 @@
 Working on a new Theatre project. Barely usable.
 -
 
-Using users.sql, view.sql, schedule.sql, hloupy_honza.sql, revizor.sql and prodana_nevesta.sql
+Use users.sql, view.sql, schedule.sql, hloupy_honza.sql, revizor.sql and prodana_nevesta.sql
 
 Homepage: nette/www/theatre/homepage
 
