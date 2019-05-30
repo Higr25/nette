@@ -1,3 +1,14 @@
+Working on a new Theatre project. Barely usable.
+
+Using users.sql, view.sql, schedule.sql, hloupy_honza.sql, revizor.sql and prodana_nevesta.sql
+
+Homepage: nette/www/theatre/homepage
+
+Schedule: nette/www/theatre/schedule
+
+Reservation: nette/www/theatre/reservation
+--------------------
+
 Database connection in local.neon file:
 
 
@@ -12,10 +23,12 @@ Database connection in local.neon file:
 	
   --------------------
   
-  Use employee_report.sql to create table.
+  Use employee_report.sql to create essential table and users.sql to create login database.
   
   --------------------
   
-  Creating report: nette-form/www/form
+  Login: nette/www/login
   
-  Report History & Edit: nette-form/www/history
+  Creating report: nette/www/form
+  
+  Report History & Edit: nette/www/history
