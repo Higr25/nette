@@ -23,8 +23,10 @@
     {/form}
 
     {else}
-    <p>Uživatel: {$user->getIdentity()->first_name}
-                 {$user->getIdentity()->last_name}
+    <p class="User">Uživatel: {$user->getIdentity()->first_name}
+                          {$user->getIdentity()->last_name}
+                          <br>
+                          ({$user->getIdentity()->role})
     </p>
 
     <a n:href="Schedule:out">Odhlásit</a>
@@ -45,13 +47,15 @@
     <tr style="font-size: 20px; font-weight: bold; background-color: #cccccc;">
       <td>Číslo</td>
       <td>Datum</td>
+      <td>Čas</td>
       <td>Jméno</td>
       <td>Cena</td>
       <td>Rezervace</td>
     </tr>
     <tr n:foreach="$shows as $show">
       <td>{$show->id}</td>
-      <td>{$show->datetime}</td>
+      <td>{$show->date}</td>
+      <td>{$show->time}</td>
       <td>{$show->name}</td>
       <td>{$show->price}</td>
       <td><a n:href="Theatre:reserve $show->table_name">Rezervovat</a></td>

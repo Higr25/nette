@@ -33,7 +33,7 @@ final class TheatrePresenter extends Nette\Application\UI\Presenter
     {
          $tableName = $table_name;
 
-         // echo '<pre>' , var_dump($tableName) , '</pre>';
+         // echo '<pre>' , var_dump($date) , '</pre>';
          // die();
 
          $this->template->seatsFloor = $this->database->table($tableName)

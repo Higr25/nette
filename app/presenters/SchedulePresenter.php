@@ -24,11 +24,13 @@ final class SchedulePresenter extends Nette\Application\UI\Presenter
     }
 
 
-    public function renderSchedule(): void
+    public function renderSchedule()
     {
          $this->template->shows = $this->database->table('schedule');
          $this->template->Pozadi = true;
 
+         // echo '<pre>' , var_dump($time) , '</pre>';
+         // die();
 
     }
 
