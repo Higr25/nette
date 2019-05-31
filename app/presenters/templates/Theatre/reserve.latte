@@ -240,6 +240,7 @@
 </div>
 
 
+
 <div class="LoginContainer">
 
   {if ! $user->IsLoggedIn()}
@@ -270,10 +271,14 @@
 <div class="FormContainer">
   {form reservationForm}
     <table class="form">
+      <tr>
+        <td>Cena:<!-- dopsat javascript funkci --> </td>
+      </tr>
       <tr n:foreach="$form->controls as $name => $field">
         <td>{label $name}</td>
         <td>{input $name}</td>
       </tr>
+
     </table>
   {/form}
 

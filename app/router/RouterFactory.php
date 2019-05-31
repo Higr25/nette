@@ -28,6 +28,7 @@ final class RouterFactory
 		$router->addRoute('theatre/schedule', 'Schedule:schedule');
 		$router->addRoute('theatre/reserve', 'Theatre:reserve');
 		$router->addRoute('theatre/out', 'Theatre:out');
+		$router->addRoute('schedule/out', 'Schedule:out');
 
 		return $router;
 	}

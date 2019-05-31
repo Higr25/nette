@@ -141,13 +141,13 @@ final class TheatrePresenter extends Nette\Application\UI\Presenter
 
          $this->getUser()->login($credentials['username'], $credentials['password']);
 
-         $this->redirect('Theatre:view');
+         $this->redirect('this');
        }
 
        public function actionOut()
        {
            $this->getUser()->logout(true);
            $this->flashMessage('Odhlášení bylo úspěšné.', 'success');
-           $this->redirect('Theatre:view');
+           $this->redirect('Schedule:schedule');
        }
 }

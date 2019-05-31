@@ -27,7 +27,48 @@ final class SchedulePresenter extends Nette\Application\UI\Presenter
     public function renderSchedule(): void
     {
          $this->template->shows = $this->database->table('schedule');
+         $this->template->Pozadi = true;
 
 
+    }
+
+    protected function createComponentLoginForm(): Form
+    {
+      $form = new Form;
+
+      $form->addText('username', 'Login:')
+           ->setRequired();
+
+      $form->addPassword('password', 'Password:')
+           ->setRequired();
+
+       $form->addSubmit('login', 'Login')
+            ->getControlPrototype()
+            ->addClass('btn btn-primary');
+
+       $form->onSuccess[] = [$this, 'authenticate'];
+
+       return $form;
+
+    }
+
+    public function authenticate(form $form, \stdClass $values)
+    {
+
+      $credentials = [
+        'username' => $values->username,
+        'password' => $values->password,
+      ];
+
+      $this->getUser()->login($credentials['username'], $credentials['password']);
+
+      $this->redirect('Schedule:schedule');
+    }
+
+    public function actionOut()
+    {
+        $this->getUser()->logout(true);
+        $this->flashMessage('Odhlášení bylo úspěšné.', 'success');
+        $this->redirect('Schedule:schedule');
     }
 }

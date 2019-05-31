@@ -47,6 +47,9 @@ div.error {
   top: 24.3%;
 }
 
+
+
+
 .FormContainer{
   position: absolute;
   left: 70%;
@@ -57,6 +60,7 @@ div.error {
   position: absolute;
   left: 70%;
   top: 0%;
+  background-color: #777777;
 }
 
 .SeatInfoContainer{
@@ -113,7 +117,8 @@ table{
   width: 100%;
   height: 100%;
   background-repeat: no-repeat;
-  z-index: -1;
+  margin: auto;
+  z-index: 1;
 }
 
 .bg2{
@@ -122,6 +127,15 @@ table{
   height: 100%;
   background-repeat: no-repeat;
   z-index: -2;
+}
+
+.bg3{
+  background-image: url('https://i.imgur.com/1rvXxug.jpg');
+  opacity: 1;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 0;
 }
 
 .form{
@@ -204,4 +218,34 @@ table{
 .header a:hover {
 	color: #fff;
 	border-bottom: 2px solid #fff;
+}
+
+.header2{
+  text-align: center;
+  font-size: 60px;
+  font-family: impact;
+  color: #e0dfdc;
+letter-spacing: .1em;
+text-shadow:
+  0 -1px 0 #fff,
+  0 1px 0 #2e2e2e,
+  0 2px 0 #2c2c2c,
+  0 3px 0 #2a2a2a,
+  0 4px 0 #282828,
+  0 5px 0 #262626,
+  0 6px 0 #242424,
+  0 7px 0 #222,
+  0 22px 30px rgba(0, 0, 0, 0.9);
+}
+
+.MyTable{
+  background-color: #777777;
+  font-weight: bold;
+  font-size: 20px;
+  font-family: sans-serif;
+}
+
+.TableHeader{
+  font-weight: bold;
+  font-size: 30px;
 }

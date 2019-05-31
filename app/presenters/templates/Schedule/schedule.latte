@@ -1,20 +1,53 @@
 {block content}
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <link href="{$basePath}/css/form.css" rel="stylesheet" type="text/css" />
-    <p class="header" n:block="title">Program divadla</p>
+  <link href="{$basePath}/css/theatre.css" rel="stylesheet" type="text/css" />
+
+  {default $Pozadi = false}
+<body n:class="$Pozadi ? 'bg3'"></body>
+
+
+<div class="LoginContainer">
+
+  {if ! $user->IsLoggedIn()}
+
+    {form loginForm}
+      <table>
+        <tr>
+          {foreach $form->controls as $name => $field}
+            <td>{label $name}</td>
+            <td>{input $name}</td>
+          {/foreach}
+        </tr>
+      </table>
+    {/form}
+
+    {else}
+    <p>Uživatel: {$user->getIdentity()->first_name}
+                 {$user->getIdentity()->last_name}
+    </p>
+
+    <a n:href="Schedule:out">Odhlásit</a>
+
+  {/if}
+</div>
+
+
+  <p class="header2" n:block="title">Program divadla Harfa</p>
 
   <div class="button-container">
       <a class="btn btn-primary" n:href="Theatre:homepage">Zpět</a>
   </div>
 
 
-  <table n:class="table, table-striped, table-hover">
+
+  <table n:class="table, table-striped, table-hover, MyTable">
     <tr style="font-size: 20px; font-weight: bold; background-color: #cccccc;">
       <td>Číslo</td>
       <td>Datum</td>
       <td>Jméno</td>
       <td>Cena</td>
+      <td>Rezervace</td>
     </tr>
     <tr n:foreach="$shows as $show">
       <td>{$show->id}</td>
@@ -24,4 +57,6 @@
       <td><a n:href="Theatre:reserve $show->table_name">Rezervovat</a></td>
     </tr>
   </table>
+
+
 {/block}
