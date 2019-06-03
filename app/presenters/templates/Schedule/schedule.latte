@@ -64,6 +64,9 @@
       <td>Jméno</td>
       <td>Cena</td>
       <td>Rezervace</td>
+      {if $user->isInRole(admin)}
+      <td>Odstranit</td>
+      {/if}
     </tr>
     <tr n:foreach="$shows as $show">
       <td>{$show->id}</td>
@@ -72,6 +75,9 @@
       <td>{$show->name}</td>
       <td>{$show->price}</td>
       <td><a n:href="Theatre:reserve $show->table_name">Rezervovat</a></td>
+      {if $user->isInRole(admin)}
+      <td><a n:href="Schedule:delete $show->id">Odstranit</a></td>
+      {/if}
     </tr>
   </table>
 
