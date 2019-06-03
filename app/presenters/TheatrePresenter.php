@@ -85,8 +85,6 @@ final class TheatrePresenter extends Nette\Application\UI\Presenter
                  ->fetch();
           $isFree = $row['free'];
 
-
-
         if ($isFree) {
 
            $seatNumberArray = [

@@ -41,6 +41,19 @@
       <a class="btn btn-primary" n:href="Theatre:homepage">Zpět</a>
   </div>
 
+{if $user->isInRole(admin)}
+  <div class="CreatorContainer">
+    {form creatorForm}
+      <tr n:foreach="$form->controls as $name => $field">
+        <td>{label $name}</td>
+        <td>{input $name}</td>
+      </tr>
+    {/form}
+  </div>
+{/if}
+
+
+
 
 
   <table n:class="table, table-striped, table-hover, MyTable">
