@@ -3,248 +3,67 @@
 <link href="{$basePath}/css/theatre.css" rel="stylesheet" type="text/css" />
 <link href="{$basePath}/js/theatre.js" rel="javascript" type="text/css" />
 
-<div class="bg"></div>
+<script>
+function addNumber(number, cell)
+  {
+     var input = document.getElementById('frm-reservationForm-seat_number');
+     var old = input.value;
+     var includer = old.includes(number);
+     var replacer = old.replace(number, '');
 
-<div class="ViewContainer1">
-  {foreach $seatsFloor as $seat}
-      {first}<table>{/first}
-        {first 10}<tr>{/first}
+     if (includer == true)
+     {
+       document.getElementById('frm-reservationForm-seat_number').value = replacer;
+     }
+     else
+     {
+        input.value = old + ' ' + number
+      }
 
-          {if $seat->free}
-                <td>
-                    <div class="cell free" onclick="addNumber({$seat->seat_number}, this)">
-                          <script>
-                          function addNumber(number, cell)
-                            {
-                               var input = document.getElementById('frm-reservationForm-seat_number');
-                               var old = input.value;
-                               var includer = old.includes(number);
-                               var replacer = old.replace(number, '');
+     if (cell.className == 'cell free')
+     {
+       cell.className = 'cell selected'
+     }
+     else
+     {
+       cell.className = 'cell free'
+     }
+  }
 
-                               if (includer == true)
-                               {
-                                 document.getElementById('frm-reservationForm-seat_number').value = replacer;
-                               }
-                               else
-                               {
-                                  input.value = old + ' ' + number
-                                }
+function showPerson(number, person, email, phone, cell)
+    {
+      var infoContainer = document.getElementById('InfoContainer');
+      var seatNumber = document.getElementById('seat_number');
+      var seatPerson = document.getElementById('person');
+      var personEmail = document.getElementById('person_email');
+      var personPhone = document.getElementById('person_phone');
 
-                               if (cell.className == 'cell free')
-                               {
-                                 cell.className = 'cell selected'
-                               }
-                               else
-                               {
-                                 cell.className = 'cell free'
-                               }
-                            }
-                          </script>
-                       {$seat->seat_number}
-                    </div>
-               </td>
-          {/if}
+      seatNumber.innerHTML = number;
+      seatPerson.innerHTML = person;
+      personEmail.innerHTML = email;
+      personPhone.innerHTML = phone;
 
-          {if $seat->reserved}
-            <td>
-              {if $user->isInRole(admin)}
-                <div class="cell reserved" onclick="showPerson({$seat->seat_number}, {$seat->person}, {$seat->person_email}, {$seat->person_phone}, this)">
-              {else}
-                <div class="cell reserved">
-              {/if}
-                    <script>
-                    function showPerson(number, person, email, phone, cell)
-                      {
+      infoContainer.style.visibility = 'visible';
+      infoContainer.style.transform = 'translateY('+(event.pageY-930)+'px)';
+      infoContainer.style.transform += 'translateX('+(event.pageX-100)+'px)';
+    }
 
-                        var seatNumber = document.getElementById('seat_number');
-                        var seatPerson = document.getElementById('person');
-                        var personEmail = document.getElementById('person_email');
-                        var personPhone = document.getElementById('person_phone');
+function hidePerson()
+  {
+    var infoContainer = document.getElementById('InfoContainer');
 
+    infoContainer.style.visibility = 'hidden';
+  }
 
+function price()
+  {
 
-                        seatNumber.innerHTML = number;
-                        seatPerson.innerHTML = person;
-                        personEmail.innerHTML = email;
-                        personPhone.innerHTML = phone;
-                      }
-                    </script>
-                    {$seat->seat_number}
-              </div>
-            </td>
-          {/if}
+  }
 
-          {if $seat->sold}
-          <td class="seat sold">{$seat->seat_number}</td>
-          {/if}
-
-        {last 10}</tr>{/last}
-      {last}</table>{/last}
-  {/foreach}
-</div>
-
-<div class="ViewContainer2">
-  {foreach $seatsBalconyLeft as $seat}
-      {first}<table>{/first}
-        {first 2}<tr>{/first}
-
-          {if $seat->free}
-                <td class="">
-                    <div class="cell free" onclick="addNumber({$seat->seat_number}, this)">
-                          <script>
-                          function addNumber(number, cell)
-                            {
-                               var input = document.getElementById('frm-reservationForm-seat_number');
-                               var old = input.value;
-                               var includer = old.includes(number);
-                               var replacer = old.replace(number, '');
-
-                               if (includer == true)
-                               {
-                                 document.getElementById('frm-reservationForm-seat_number').value = replacer;
-                               }
-                               else
-                               {
-                                  input.value = old + ' ' + number
-                                }
-
-                               if (cell.className == 'cell free')
-                               {
-                                 cell.className = 'cell selected'
-                               }
-                               else
-                               {
-                                 cell.className = 'cell free'
-                               }
-                            }
-                          </script>
-                       {$seat->seat_number}
-                    </div>
-               </td>
-          {/if}
-
-          {if $seat->reserved}
-            <td>
-              {if $user->isInRole(admin)}
-                <div class="cell reserved" onclick="showPerson({$seat->seat_number}, {$seat->person}, {$seat->person_email}, {$seat->person_phone}, this)">
-              {else}
-                <div class="cell reserved">
-              {/if}
-                    <script>
-                    function showPerson(number, person, email, phone, cell)
-                      {
-
-                        var seatNumber = document.getElementById('seat_number');
-                        var seatPerson = document.getElementById('person');
-                        var personEmail = document.getElementById('person_email');
-                        var personPhone = document.getElementById('person_phone');
-
-
-
-                        seatNumber.innerHTML = number;
-                        seatPerson.innerHTML = person;
-                        personEmail.innerHTML = email;
-                        personPhone.innerHTML = phone;
-                      }
-                    </script>
-                    {$seat->seat_number}
-              </div>
-            </td>
-          {/if}
-
-          {if $seat->sold}
-          <td class="seat sold">{$seat->seat_number}</td>
-          {/if}
-
-        {last 2}</tr>{/last}
-      {last}</table>{/last}
-  {/foreach}
-</div>
-
-<div class="ViewContainer3">
-  {foreach $seatsBalconyRight as $seat}
-      {first}<table>{/first}
-        {first 2}<tr>{/first}
-
-          {if $seat->free}
-                <td class="">
-                    <div class="cell free" onclick="addNumber({$seat->seat_number}, this)">
-                          <script>
-                          function addNumber(number, cell)
-                            {
-                               var input = document.getElementById('frm-reservationForm-seat_number');
-                               var old = input.value;
-                               var includer = old.includes(number);
-                               var replacer = old.replace(number, '');
-
-                               if (includer == true)
-                               {
-                                 document.getElementById('frm-reservationForm-seat_number').value = replacer;
-                               }
-                               else
-                               {
-                                  input.value = old + ' ' + number
-                                }
-
-                               if (cell.className == 'cell free')
-                               {
-                                 cell.className = 'cell selected'
-                               }
-                               else
-                               {
-                                 cell.className = 'cell free'
-                               }
-                            }
-                          </script>
-                       {$seat->seat_number}
-                    </div>
-               </td>
-          {/if}
-
-          {if $seat->reserved}
-            <td>
-              {if $user->isInRole(admin)}
-                <div class="cell reserved" onclick="showPerson({$seat->seat_number}, {$seat->person}, {$seat->person_email}, {$seat->person_phone}, this)">
-              {else}
-                <div class="cell reserved">
-              {/if}
-                    <script>
-                    function showPerson(number, person, email, phone, cell)
-                      {
-
-                        var seatNumber = document.getElementById('seat_number');
-                        var seatPerson = document.getElementById('person');
-                        var personEmail = document.getElementById('person_email');
-                        var personPhone = document.getElementById('person_phone');
-
-
-
-                        seatNumber.innerHTML = number;
-                        seatPerson.innerHTML = person;
-                        personEmail.innerHTML = email;
-                        personPhone.innerHTML = phone;
-                      }
-                    </script>
-                    {$seat->seat_number}
-              </div>
-            </td>
-          {/if}
-
-          {if $seat->sold}
-          <td class="seat sold">{$seat->seat_number}</td>
-          {/if}
-
-        {last 2}</tr>{/last}
-      {last}</table>{/last}
-  {/foreach}
-</div>
-
-
+</script>
 
 <div class="LoginContainer">
-
   {if ! $user->IsLoggedIn()}
-
     {form loginForm}
       <table>
         <tr>
@@ -268,50 +87,168 @@
   {/if}
 </div>
 
+<div class="bg"></div>
+
+<table class="ViewContainer">
+  <tr>
+        <td class="ContainerCell">
+          <div class="ViewContainer2">
+            {foreach $seatsBalconyLeft as $seat}
+                {first}<table>{/first}
+                  {first 2}<tr>{/first}
+
+                    {if $seat->free}
+                          <td class="">
+                              <div class="cell free" onclick="addNumber({$seat->seat_number}, this)">
+                                 {$seat->seat_number}
+                              </div>
+                         </td>
+                    {/if}
+
+                    {if $seat->reserved}
+                      <td>
+                        {if $user->isInRole(admin)}
+                          <div class="cell reserved" onmouseover="showPerson({$seat->seat_number}, {$seat->person}, {$seat->person_email}, {$seat->person_phone}, this)" onmouseout="hidePerson()">
+                        {else}
+                          <div class="cell reserved">
+                        {/if}
+
+                              {$seat->seat_number}
+                        </div>
+                      </td>
+                    {/if}
+
+                    {if $seat->sold}
+                    <td class="seat sold">{$seat->seat_number}</td>
+                    {/if}
+                  {last 2}</tr>{/last}
+                {last}</table>{/last}
+            {/foreach}
+          </div>
+        <p class="ViewDescription">Levý Balkon</p>
+    </td>
+
+    <td class="ContainerCell">
+      <p class="ViewHeader">JEVIŠTĚ</p>
+        <div class="ViewContainer1">
+          {foreach $seatsFloor as $seat}
+              {first}<table>{/first}
+                {first 10}<tr>{/first}
+                  {if $seat->free}
+                        <td>
+                            <div class="cell free" onclick="addNumber({$seat->seat_number}, this)">
+                               {$seat->seat_number}
+                            </div>
+                       </td>
+                  {/if}
+
+                  {if $seat->reserved}
+
+                    <td>
+                      {if $user->isInRole(admin)}
+                        <div class="cell reserved" onmouseover="showPerson({$seat->seat_number}, {$seat->person}, {$seat->person_email}, {$seat->person_phone}, this)" onmouseout="hidePerson();">
+                      {else}
+                        <div class="cell reserved">
+                      {/if}
+                            {$seat->seat_number}
+                      </div>
+                    </td>
+                  {/if}
+
+                  {if $seat->sold}
+                  <td class="seat sold">{$seat->seat_number}</td>
+                  {/if}
+
+                {last 10}</tr>{/last}
+              {last}</table>{/last}
+          {/foreach}
+        </div>
+        <p class="ViewDescription">Přízemí</p>
+    </td>
+
+      <td class="ContainerCell">
+        <div class="ViewContainer3">
+          {foreach $seatsBalconyRight as $seat}
+              {first}<table>{/first}
+                {first 2}<tr>{/first}
+
+                  {if $seat->free}
+                        <td class="">
+                            <div class="cell free" onclick="addNumber({$seat->seat_number}, this)">
+                               {$seat->seat_number}
+                            </div>
+                       </td>
+                  {/if}
+
+                  {if $seat->reserved}
+                    <td>
+                      {if $user->isInRole(admin)}
+                        <div class="cell reserved" onmouseover="showPerson({$seat->seat_number}, {$seat->person}, {$seat->person_email}, {$seat->person_phone}, this)" onmouseout="hidePerson()">
+                      {else}
+                        <div class="cell reserved">
+                      {/if}
+                            {$seat->seat_number}
+                      </div>
+                    </td>
+                  {/if}
+
+                  {if $seat->sold}
+                  <td class="seat sold">{$seat->seat_number}</td>
+                  {/if}
+
+                {last 2}</tr>{/last}
+              {last}</table>{/last}
+          {/foreach}
+        </div>
+      <p class="ViewDescription">Pravý Balkon</p>
+    </td>
+
+  <td class="FormCell">
+      <div class="FormContainer">
+        {form reservationForm}
+          <table class="table-responsive FormTable">
+            <tr>
+              <td>Cena:<span id="Price"></span></td>
+            </tr>
+            <tr n:foreach="$form->controls as $name => $field">
+              <td>{label $name}</td>
+              <td>{input $name}</td>
+            </tr>
+          </table>
+        {/form}
+          <div n:foreach="$flashes as $flash" n:class="flash, $flash->type">
+            {$flash->message}
+          </div>
+      </div>
+    </td>
+  </tr>
+</table>
 
 
-<div class="FormContainer">
-  {form reservationForm}
-    <table class="form">
-      <tr>
-        <td>Cena:<!-- dopsat javascript funkci --> </td>
-      </tr>
-      <tr n:foreach="$form->controls as $name => $field">
-        <td>{label $name}</td>
-        <td>{input $name}</td>
-      </tr>
+    {if $user->isInRole(admin)}
+      <div id="InfoContainer" class="SeatInfoContainer">
+        <table class="SeatInfo">
+          <tr>
+            <td id='seat_number'></td>
+          </tr>
+          <tr>
+            <td id='person'></td>
+          </tr>
+          <tr>
+            <td id='person_email'></td>
+          </tr>
+          <tr>
+            <td id='person_phone'></td>
+          </tr>
+        </table>
+      </div>
+    {/if}
 
-    </table>
-  {/form}
 
-    <div n:foreach="$flashes as $flash" n:class="flash, $flash->type">
-      {$flash->message}
-    </div>
 
-</div>
 
-{if $user->isInRole(admin)}
-  <div class="SeatInfoContainer">
-    <table class="SeatInfo">
-      <tr>
-        <td>Číslo Sedadla</td>
-        <td id='seat_number'></td>
-      </tr>
-      <tr>
-        <td>Jméno a příjmení</td>
-        <td id='person'></td>
-      </tr>
-      <tr>
-        <td>E-mail</td>
-        <td id='person_email'></td>
-      </tr>
-      <tr>
-        <td>Telefon</td>
-        <td id='person_phone'></td>
-      </tr>
-    </table>
-  </div>
-{/if}
+
+
 
 <div class="ButtonContainer">
     <a class="btn btn-primary" n:href="Schedule:schedule">Zpět</a>
