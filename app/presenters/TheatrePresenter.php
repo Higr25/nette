@@ -29,13 +29,11 @@ final class TheatrePresenter extends Nette\Application\UI\Presenter
 
 
 
-    public function renderReserve($table_name): void
+    public function renderReserve($tableName): void
     {
-         $tableName = $table_name;
-
-         // echo '<pre>' , var_dump($date) , '</pre>';
-         // die();
-
+         $this->template->show = $this->database->table('schedule')
+                                ->where('table_name', $tableName)
+                                ->fetch();
          $this->template->seatsFloor = $this->database->table($tableName)
                                       ->where('seat_number <= ?', 120);
          $this->template->seatsBalconyLeft = $this->database->table($tableName)
@@ -43,6 +41,9 @@ final class TheatrePresenter extends Nette\Application\UI\Presenter
          $this->template->seatsBalconyRight = $this->database->table($tableName)
                                               ->where('seat_number >= ? AND seat_number <= ?', 147, 172);
     }
+
+    // echo '<pre>' , var_dump($show) , '</pre>';
+    // die();
 
 
     public function createComponentReservationForm()

@@ -4,12 +4,22 @@
 <link href="{$basePath}/js/theatre.js" rel="javascript" type="text/css" />
 
 <script>
+var selected = 0;
+
 function addNumber(number, cell)
   {
      var input = document.getElementById('frm-reservationForm-seat_number');
      var old = input.value;
      var includer = old.includes(number);
      var replacer = old.replace(number, '');
+
+
+     var output = document.getElementById('price');
+     var field = document.getElementById('frm-reservationForm-seat_number');
+     var price = {$show->price};
+     var debug = document.getElementById('debugger');
+
+     output.innerHTML = price;
 
      if (includer == true)
      {
@@ -23,11 +33,16 @@ function addNumber(number, cell)
      if (cell.className == 'cell free')
      {
        cell.className = 'cell selected'
+       selected++;
      }
      else
      {
        cell.className = 'cell free'
+       selected--;
      }
+
+     output.innerHTML = price * selected;
+
   }
 
 function showPerson(number, person, email, phone, cell)
@@ -55,7 +70,7 @@ function hidePerson()
     infoContainer.style.visibility = 'hidden';
   }
 
-function price()
+function showPrice()
   {
 
   }
@@ -96,10 +111,9 @@ function price()
             {foreach $seatsBalconyLeft as $seat}
                 {first}<table>{/first}
                   {first 2}<tr>{/first}
-
                     {if $seat->free}
-                          <td class="">
-                              <div class="cell free" onclick="addNumber({$seat->seat_number}, this)">
+                          <td>
+                              <div class="cell free" onclick="addNumber({$seat->seat_number}, this);">
                                  {$seat->seat_number}
                               </div>
                          </td>
@@ -174,7 +188,7 @@ function price()
 
                   {if $seat->free}
                         <td class="">
-                            <div class="cell free" onclick="addNumber({$seat->seat_number}, this)">
+                            <div class="cell free" onclick="addNumber({$seat->seat_number}, this,)">
                                {$seat->seat_number}
                             </div>
                        </td>
@@ -208,7 +222,7 @@ function price()
         {form reservationForm}
           <table class="table-responsive FormTable">
             <tr>
-              <td>Cena:<span id="Price"></span></td>
+              <td>Cena:<span id="price"></span></td>
             </tr>
             <tr n:foreach="$form->controls as $name => $field">
               <td>{label $name}</td>
@@ -254,5 +268,5 @@ function price()
     <a class="btn btn-primary" n:href="Schedule:schedule">Zpět</a>
 </div>
 
-<!-- <button type="button" name="button" id="testbutton">test</button> -->
-<!-- <p id="output">Debugger</p> -->
+<!-- <button type="button" name="button" id="testbutton" onclick="showPrice();">test</button>
+<p id="debugger">Debugger</p> -->
