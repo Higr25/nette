@@ -17,11 +17,13 @@ tracy:
 
 
 services:
-	router: App\Router\RouterFactory::createRouter
 	- App\Model\UserManager
+	- App\Model\ReserveManager
+	router: App\Router\RouterFactory::createRouter
 	nette.mailer:
 		class: Nette\Mail\IMailer
 		factory: Nextras\MailPanel\FileMailer(%tempDir%/mail-panel-mails)
+
 
 
 

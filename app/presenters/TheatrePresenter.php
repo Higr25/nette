@@ -7,26 +7,26 @@ namespace App\Presenters;
 use Nette;
 use Nette\Application\UI\Form;
 use App\Model\UserManager;
+use App\Model\ReserveManager;
 use Nette\Security\User;
 use Nette\Security\Identity;
 
 final class TheatrePresenter extends Nette\Application\UI\Presenter
 {
-
-
     private $database;
     private $user;
     private $userManager;
 
-    public function __construct(Nette\Database\Context $database, User $user, UserManager $userManager)
+    /** @var App\Model\ReserveManager */
+    private $reserveManager;
+
+    public function __construct(Nette\Database\Context $database, User $user, UserManager $userManager, ReserveManager $reserveManager)
     {
         $this->database = $database;
         $this->user = $user;
         $this->userManager = $userManager;
+        $this->reserveManager = $reserveManager;
     }
-
-
-
 
 
     public function renderReserve($tableName): void
@@ -44,6 +44,11 @@ final class TheatrePresenter extends Nette\Application\UI\Presenter
 
     // echo '<pre>' , var_dump($show) , '</pre>';
     // die();
+
+    public function renderCompleted(array $seatNumbers)
+    {
+        $this->template->seatNumbers = $seatNumbers;
+    }
 
 
     public function createComponentReservationForm()
@@ -67,50 +72,12 @@ final class TheatrePresenter extends Nette\Application\UI\Presenter
         $form->addSubmit('submit', 'Rezervovat');
 
 
-        $form->onSuccess[] = [$this, 'reserve'];
+        $form->onSuccess[] = [$this->reserveManager, 'reserve'];
 
         return $form;
     }
 
-    public function reserve(Form $form, $values)
-    {
-
-      $tableName = $this->getParameter('table_name');
-
-      $seatNumberInput = $values['seat_number'];
-      $seatNumbers = explode(' ', $seatNumberInput);
-
-        foreach ($seatNumbers as $seatNumber) {
-          $row = $this->database->table($tableName)
-                 ->where('seat_number', $seatNumber)
-                 ->fetch();
-          $isFree = $row['free'];
-
-        if ($isFree) {
-
-           $seatNumberArray = [
-             'seat_number' => $seatNumber,
-             'person' => $values['person'],
-             'person_email' => $values['person_email'],
-             'person_phone' => $values['person_phone'],
-             'free' => 0,
-             'reserved' => 1];
-
-           $seat = $this->database->table($tableName)
-                 ->where('seat_number', $seatNumberArray['seat_number'])
-                 ->update([
-                     'person' => $seatNumberArray['person'],
-                     'person_email' => $seatNumberArray['person_email'],
-                     'person_phone' => $seatNumberArray['person_phone'],
-                     'free' => 0,
-                     'reserved' => 1,
-                         ]);
-            }
-          }
-         $this->redirect('this');
-       }
-
-       protected function createComponentLoginForm(): Form
+           protected function createComponentLoginForm(): Form
        {
          $form = new Form;
 

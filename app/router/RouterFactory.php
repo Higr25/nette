@@ -30,6 +30,7 @@ final class RouterFactory
 		$router->addRoute('theatre/out', 'Theatre:out');
 		$router->addRoute('schedule/out', 'Schedule:out');
 		$router->addRoute('schedule/delete', 'Schedule:delete');
+		$router->addRoute('theatre/completed', 'Theatre:completed');
 
 		return $router;
 	}
