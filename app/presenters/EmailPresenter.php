@@ -32,21 +32,6 @@ final class EmailPresenter extends Nette\Application\UI\Presenter
       $mailer = new SendmailMailer;
       $mailer->send($email);
 
-      // echo '<pre>' , var_dump($email) , '</pre>';
-      //
-      // $to = 'shadowraider@seznam.cz';
-      // $subject = 'This is subject';
-      // $message = 'This is simple text message.';
-      // $header = 'From:shadowraiderr@gmail.com \r\n';
-      // $retval = mail($to,$subject,$message,$header);
-      // if( $retval == true )
-      // {
-      //   echo "Message sent successfully...";
-      // }
-      // else
-      // {
-      //   echo "Message could not be sent...";
-      // }
 
 
 

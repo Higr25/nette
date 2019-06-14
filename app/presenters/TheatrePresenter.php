@@ -16,8 +16,6 @@ final class TheatrePresenter extends Nette\Application\UI\Presenter
     private $database;
     private $user;
     private $userManager;
-
-    /** @var App\Model\ReserveManager */
     private $reserveManager;
 
     public function __construct(Nette\Database\Context $database, User $user, UserManager $userManager, ReserveManager $reserveManager)
@@ -45,9 +43,14 @@ final class TheatrePresenter extends Nette\Application\UI\Presenter
     // echo '<pre>' , var_dump($show) , '</pre>';
     // die();
 
-    public function renderCompleted(array $seatNumbers)
+    public function renderCompleted(array $seatNumbers, $tableName)
     {
+
         $this->template->seatNumbers = $seatNumbers;
+        $this->template->showInfo = $this->database->table('schedule')
+                                  ->where('table_name', $tableName)
+                                  ->fetch();
+        $this->template->tableName = $tableName;
     }
 
 

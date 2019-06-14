@@ -22,14 +22,11 @@ class ReserveManager
 
   public function reserve(Form $form, $values)
   {
-    $reservePresenter = $form->getPresenter();
-
-    $tableName = $reservePresenter->getParameter('tableName');
+    $reservePage = $form->getPresenter();
+    $tableName = $reservePage->getParameter('tableName');
 
     $seatNumberInput = $values['seat_number'];
     $seatNumbers = explode(' ', $seatNumberInput);
-
-
 
       foreach ($seatNumbers as $seatNumber)
       {
@@ -45,8 +42,7 @@ class ReserveManager
            'person' => $values['person'],
            'person_email' => $values['person_email'],
            'person_phone' => $values['person_phone'],
-           'free' => 0,
-           'reserved' => 1];
+              ];
 
          $seat = $this->database->table($tableName)
                ->where('seat_number', $seatNumberArray['seat_number'])
@@ -59,14 +55,12 @@ class ReserveManager
                        ]);
           }
         }
+        $reservePage->redirect('Theatre:completed', [$seatNumbers, $tableName]);
 
-        // echo '<pre>' , var_dump($seatNumbers) , '</pre>';
+        // echo '<pre>' , var_dump($tableName) , '</pre>';
         // die();
 
 
-       $reservePresenter->redirect('Theatre:completed', [$seatNumbers]);
+
      }
-
-
-
 }

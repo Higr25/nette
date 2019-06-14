@@ -81,7 +81,7 @@ final class FormPresenter extends Nette\Application\UI\Presenter
         ]);
 
       } else {
-
+        
         $this->database->table('employee_report')->insert([
           'first_name' => $user->getIdentity()->first_name,
           'last_name' => $user->getIdentity()->last_name,
@@ -97,11 +97,8 @@ final class FormPresenter extends Nette\Application\UI\Presenter
       $this->redirect('this');
     }
 
-
-
     public function renderEdit(int $id)
     {
-
       $employeeReport = $this->database->table('employee_report')->get($id);
       if (!$employeeReport){
         $this->error('Výkaz s tímto číslem neexistuje');
@@ -114,9 +111,5 @@ final class FormPresenter extends Nette\Application\UI\Presenter
       $employeeReportArray['work_end'] = $workEnd->format('H:i');
 
       $this['employeeForm']->setDefaults($employeeReportArray);
-
     }
-
-
-
 }
