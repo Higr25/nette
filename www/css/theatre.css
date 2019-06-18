@@ -150,6 +150,15 @@ table{
   z-index: 0;
 }
 
+.bg4{
+  background-image: url('https://i.imgur.com/NRAOG6M.jpg');
+  opacity: 1;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -1;
+}
+
 .form{
   position: relative;
   font-size: 20px;
@@ -170,14 +179,29 @@ table{
   background-color: #dbdbdb;
 }
 
-
+.Info{
+  text-align: center;
+  position: relative;
+  top: 30%;
+  font-size: 25px;
+  font-family: sans-serif;
+}
 
 .header {
   position: absolute;
   top: 30%;
   left: 30%;
   text-align: center;
+}
 
+.header3{
+  position: relative;
+  top: 20%;
+  text-align: center;
+  font-size: 40px;
+  font-family: impact;
+  color: #7a7876;
+  letter-spacing: .1em;
 }
 
 .header h1 {

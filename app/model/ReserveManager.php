@@ -27,6 +27,8 @@ class ReserveManager
 
     $seatNumberInput = $values['seat_number'];
     $seatNumbers = explode(' ', $seatNumberInput);
+    $price = $values['price'];
+    $email = $values['person_email'];
 
       foreach ($seatNumbers as $seatNumber)
       {
@@ -55,7 +57,7 @@ class ReserveManager
                        ]);
           }
         }
-        $reservePage->redirect('Theatre:completed', [$seatNumbers, $tableName]);
+        $reservePage->redirect('Completed:completed', [$seatNumbers, $tableName, $price, $email]);
 
         // echo '<pre>' , var_dump($tableName) , '</pre>';
         // die();

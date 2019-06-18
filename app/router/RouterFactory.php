@@ -22,7 +22,7 @@ final class RouterFactory
 		$router->addRoute('logout', 'Login:out');
 		$router->addRoute('login', 'Login:login');
 		$router->addRoute('register', 'Register:default');
-		$router->addRoute('email', 'Email:default');
+		$router->addRoute('email', 'Email:email');
 		$router->addRoute('sendemail', 'Email:SendEmail');
 		$router->addRoute('theatre/homepage', 'Theatre:homepage');
 		$router->addRoute('theatre/schedule', 'Schedule:schedule');
@@ -30,7 +30,7 @@ final class RouterFactory
 		$router->addRoute('theatre/out', 'Theatre:out');
 		$router->addRoute('schedule/out', 'Schedule:out');
 		$router->addRoute('schedule/delete', 'Schedule:delete');
-		$router->addRoute('theatre/completed', 'Theatre:completed');
+		$router->addRoute('theatre/completed', 'Completed:completed');
 
 		return $router;
 	}

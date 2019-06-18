@@ -1,0 +1,23 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link href="{$basePath}/css/theatre.css" rel="stylesheet" type="text/css" />
+<link href="{$basePath}/js/theatre.js" rel="javascript" type="text/css" />
+
+<div class="bg4">
+
+<div class="header3">
+  <p>Rezervace byla úspěšná. Děkujeme za Váš zájem.</p>
+</div>
+
+<div class="Info">
+  <p>Máte rezervovaná sedadla
+    <tr n:foreach="$seatNumbers as $seatNumber">
+    {$seatNumber}
+  </tr>.
+  Celková cena je {$price},-
+</p>
+  <p>Vaše představení {$showInfo->name} začíná {$showInfo->date} v {$showInfo->time}. Dostavte se prosím do divadla nepojději v {$early}.</p>
+  <p>Na Váš email {$email} jsme vám zaslali všechny potřebné informace.</p>
+  <br>
+  <br>
+  <h2>Těšíme se na Vaši návštěvu.</h2>
+</div>

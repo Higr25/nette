@@ -14,12 +14,14 @@ function addNumber(number, cell)
      var replacer = old.replace(number, '');
 
 
-     var output = document.getElementById('price');
+     var output = document.getElementById('frm-reservationForm-price');
+     var output2 = document.getElementById('price');
      var field = document.getElementById('frm-reservationForm-seat_number');
      var price = {$show->price};
      var debug = document.getElementById('debugger');
 
-     output.innerHTML = price;
+     output.value = price;
+     output2.innerHTML = price;
 
      if (includer == true)
      {
@@ -41,7 +43,8 @@ function addNumber(number, cell)
        selected--;
      }
 
-     output.innerHTML = price * selected;
+     output.value = price * selected;
+     output2.innerHTML = price * selected;
 
   }
 

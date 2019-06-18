@@ -43,22 +43,17 @@ final class TheatrePresenter extends Nette\Application\UI\Presenter
     // echo '<pre>' , var_dump($show) , '</pre>';
     // die();
 
-    public function renderCompleted(array $seatNumbers, $tableName)
-    {
-
-        $this->template->seatNumbers = $seatNumbers;
-        $this->template->showInfo = $this->database->table('schedule')
-                                  ->where('table_name', $tableName)
-                                  ->fetch();
-        $this->template->tableName = $tableName;
-    }
-
 
     public function createComponentReservationForm()
     {
         $form = new Form;
 
         $form->addTextArea('seat_number')
+             ->getControlPrototype()
+             ->addClass('hidden')
+             ->setRequired();
+
+        $form->addText('price')
              ->getControlPrototype()
              ->addClass('hidden')
              ->setRequired();
