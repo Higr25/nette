@@ -27,13 +27,10 @@ final class SchedulePresenter extends Nette\Application\UI\Presenter
     }
 
 
-    public function renderSchedule($tableVerify)
+    public function renderSchedule()
     {
          $this->template->shows = $this->database->table('schedule');
          $this->template->Pozadi = true;
-         $this->template->tableVerify = $tableVerify;
-         dump($tableVerify);
-
     }
 
     protected function createComponentCreatorForm(): Form

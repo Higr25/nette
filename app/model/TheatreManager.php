@@ -27,8 +27,14 @@ class TheatreManager
 
     $seatNumberInput = $values['seat_number'];
     $seatNumbers = explode(' ', $seatNumberInput);
-    $price = $values['price'];
-    $email = $values['person_email'];
+
+    $params = [
+      'price' => $values['price'],
+      'email' => $values['person_email'],
+      'person' => $values['person'],
+      'tableName' => $tableName,
+      'seatNumbers' => $values['seat_number']
+    ];
 
       foreach ($seatNumbers as $seatNumber)
       {
@@ -57,7 +63,9 @@ class TheatreManager
                        ]);
           }
         }
-        $reservePage->redirect('Completed:completed', [$seatNumbers, $tableName, $price, $email]);
+
+
+        $reservePage->redirect('Completed:completed', [$params]);
 
         // echo '<pre>' , var_dump($tableName) , '</pre>';
         // die();
@@ -76,7 +84,7 @@ class TheatreManager
        $datetime = new \DateTime($date . ' ' . $time);
        $tableNameDB = $values->name;
        $tableNameDB = str_replace(' ','_', $tableNameDB);
-       
+
        $replace = [
              'Á' => 'A','Č' => 'C', 'Ď' => 'D', 'É' => 'E', 'Ě' => 'E', 'Ĕ' => 'E', 'Í' => 'I', 'Ň' => 'N',
              'Ó' => 'O', 'Ř' => 'R', 'Š' => 'S', 'Ť' => 'T', 'Ú' => 'U', 'Ů' => 'U', 'Ý' => 'Y', 'Ž' => 'Z',
