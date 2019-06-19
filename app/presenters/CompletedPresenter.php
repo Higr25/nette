@@ -6,7 +6,7 @@ namespace App\Presenters;
 
 use Nette;
 use Nette\Application\UI\Form;
-use App\Model\ReserveManager;
+use App\Model\TheatreManager;
 use Nette\Utils\DateTime;
 use Nette\Mail\Message;
 use Nette\Mail\SendmailMailer;
@@ -20,7 +20,7 @@ final class CompletedPresenter extends Nette\Application\UI\Presenter
         $this->database = $database;
 
         $email = new Message;
-  
+
         $email->setFrom('shadowraiderr@gmail.com')
               ->addTo('shadowraider@seznam.cz')
               ->setSubject('test')

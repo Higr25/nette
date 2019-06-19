@@ -7,7 +7,7 @@ namespace App\Presenters;
 use Nette;
 use Nette\Application\UI\Form;
 use App\Model\UserManager;
-use App\Model\ReserveManager;
+use App\Model\TheatreManager;
 use Nette\Security\User;
 use Nette\Security\Identity;
 
@@ -16,14 +16,14 @@ final class TheatrePresenter extends Nette\Application\UI\Presenter
     private $database;
     private $user;
     private $userManager;
-    private $reserveManager;
+    private $theatreManager;
 
-    public function __construct(Nette\Database\Context $database, User $user, UserManager $userManager, ReserveManager $reserveManager)
+    public function __construct(Nette\Database\Context $database, User $user, UserManager $userManager, TheatreManager $theatreManager)
     {
         $this->database = $database;
         $this->user = $user;
         $this->userManager = $userManager;
-        $this->reserveManager = $reserveManager;
+        $this->theatreManager = $theatreManager;
     }
 
 
@@ -70,7 +70,7 @@ final class TheatrePresenter extends Nette\Application\UI\Presenter
         $form->addSubmit('submit', 'Rezervovat');
 
 
-        $form->onSuccess[] = [$this->reserveManager, 'reserve'];
+        $form->onSuccess[] = [$this->theatreManager, 'reserve'];
 
         return $form;
     }
