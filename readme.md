@@ -1,7 +1,13 @@
 Working on a new Theatre project. Barely usable.
 -
 
-Use users.sql, view.sql, schedule.sql, hloupy_honza.sql, revizor.sql and prodana_nevesta.sql
+Use admin_user.sql, view.sql, schedule.sql, hloupy_honza.sql, revizor.sql and prodana_nevesta.sql
+
+Use admin account to unlock admin features in Schedule and Reservation.
+
+Login: admin
+Password: admin   
+
 
 Homepage: nette/www/theatre/homepage
 
