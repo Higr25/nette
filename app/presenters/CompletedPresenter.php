@@ -12,24 +12,19 @@ use Nette\Mail\Message;
 use Nette\Mail\SendmailMailer;
 use Nette\Application\UI\ITemplate;
 
-
-final class CompletedPresenter extends Nette\Application\UI\Presenter
+class CompletedPresenter extends Nette\Application\UI\Presenter
 {
     private $database;
+    private $templateFactory;
 
-    public function __construct(Nette\Database\Context $database)
+    public function __construct(Nette\Database\Context $database, Nette\Application\UI\ITemplateFactory $templateFactory)
     {
       $this->database = $database;
-
-
-
-
+      $this->templateFactory = $templateFactory;
     }
 
     public function renderCompleted(array $params)
     {
-
-
         $row = $this->database->table('schedule')
                               ->where('table_name', $params['tableName'])
                               ->fetch();
@@ -53,36 +48,27 @@ final class CompletedPresenter extends Nette\Application\UI\Presenter
           'person' => $params['person'],
           'email' => $params['email'],
           'price' => $params['price'],
-          'seatNumbers' => $params['seatNumbers'],
+          'seats' => $params['seatNumbers'],
           'early' => $params['early'],
-          'showName' => $showInfo['name'],
-          'showDate' => $showInfo['date'],
-          'showTime' => $showInfo['time']
+          'name' => $showInfo['name'],
+          'date' => $showInfo['date'],
+          'time' => $showInfo['time']
         ];
-       //  $template = $this->createTemplate();
-       //  $template->setParameters($emailParams);
-       //  $template->setFile(__DIR__ . '\templates\completed\email.latte');
-       //  // dump($emailParams);
-       //  // die();
-       //  $email = new Message;
-       //  $email->setFrom('Divadlo Harfa <divadlo@harfa.cz>')
-       //        ->addTo($emailParams['email'])
-       //        ->setSubject('Potvrzení Rezervace')
-       //        ->setHtmlBody((string) $template);
-       //
-       // $mailer = new SendmailMailer;
-       // $mailer->send($email);
 
 
+        $template = $this->templateFactory->createTemplate();
+        $template->emailParams = $emailParams;
+        $template->setFile(__DIR__ . '\templates\completed\email.latte');
+        // dump($emailParams);
+        // die();
+        $email = new Message;
+        $email->setFrom('Divadlo Harfa <divadlo@harfa.cz>')
+              ->addTo($emailParams['email'])
+              ->setSubject('Potvrzení Rezervace')
+              ->setHtmlBody((string) $template);
 
+       $mailer = new SendmailMailer;
+       $mailer->send($email);
 
     }
-
-   //  protected function createTemplate()
-   // {
-   //     $template = $this->templateFactory->createTemplate();
-   //     $template->getLatte()->addProvider('uiControl', $this->linkGenerator);
-   //
-   //     return $template;
-   // }
 }
