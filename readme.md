@@ -1,4 +1,4 @@
-Working on a new Theatre project. Barely usable.
+Working on a new Theatre project. Already usable, not completed.
 -
 
 Use admin_user.sql, view.sql, schedule.sql, hloupy_honza.sql, revizor.sql and prodana_nevesta.sql
